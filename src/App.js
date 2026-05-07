@@ -8,6 +8,7 @@ import { simulateScore, simulatePenalties } from "./utils/simulation.js";
 import TabNav from "./components/TabNav.js";
 import GroupStage from "./components/GroupStage/GroupStage.js";
 import KnockoutBracket from "./components/Knockout/KnockoutBracket.js";
+import ChampionCelebration from "./components/Champion/ChampionCelebration.js";
 import "./App.css";
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
   });
 
   const [activeTab, setActiveTab] = useState("groups");
+  const [showChampionCelebration, setShowChampionCelebration] = useState(false);
 
   // Derived state: group standings
   const groupStandings = useMemo(() => computeAllGroupStandings(groupResults), [groupResults]);
@@ -60,6 +62,25 @@ function App() {
 
   // Derived state: fully populated bracket
   const populatedBracket = useMemo(() => populateBracket(advancedTeams, slotAssignment, knockoutResults), [advancedTeams, slotAssignment, knockoutResults]);
+
+  // Derived state: determine champion (winner of Final match 104)
+  const champion = useMemo(() => {
+    const finalMatch = populatedBracket[104];
+    const finalResult = knockoutResults[104];
+    if (!finalMatch || !finalResult || finalResult.homeGoals === null || finalResult.awayGoals === null) {
+      return null;
+    }
+    if (finalResult.homeGoals > finalResult.awayGoals) {
+      return finalMatch.homeTeam;
+    } else if (finalResult.awayGoals > finalResult.homeGoals) {
+      return finalMatch.awayTeam;
+    } else if (finalResult.penaltyWinner === "home") {
+      return finalMatch.homeTeam;
+    } else if (finalResult.penaltyWinner === "away") {
+      return finalMatch.awayTeam;
+    }
+    return null;
+  }, [populatedBracket, knockoutResults]);
 
   // Handler: update group match score
   const handleGroupScore = (matchId, homeGoals, awayGoals) => {
@@ -181,9 +202,18 @@ function App() {
             onReset={handleReset}
             advancedTeams={advancedTeams}
             slotAssignment={slotAssignment}
+            champion={champion}
+            onShowChampion={() => setShowChampionCelebration(true)}
           />
         )}
       </div>
+
+      {showChampionCelebration && champion && (
+        <ChampionCelebration
+          winner={champion}
+          onDismiss={() => setShowChampionCelebration(false)}
+        />
+      )}
     </div>
   );
 }

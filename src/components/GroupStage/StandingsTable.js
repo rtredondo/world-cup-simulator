@@ -1,4 +1,5 @@
 import React from "react";
+import { TEAMS } from "../../data/teams.js";
 import "./StandingsTable.css";
 
 export default function StandingsTable({ standings, groupLetter, qualifiedThirds }) {
@@ -29,7 +30,7 @@ export default function StandingsTable({ standings, groupLetter, qualifiedThirds
               }
             >
               <td>{row.position}</td>
-              <td className="team-cell">{row.team}</td>
+              <td className="team-cell">{TEAMS[row.team]?.flag} {row.team}</td>
               <td>{row.played}</td>
               <td>{row.won}</td>
               <td>{row.drawn}</td>

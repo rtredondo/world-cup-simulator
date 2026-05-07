@@ -1,10 +1,13 @@
 import React from "react";
+import { TEAMS } from "../../data/teams.js";
 import "./KnockoutMatch.css";
 
 export default function KnockoutMatch({ match, result, onScoreChange, onSimulate, matchNum }) {
 
   const homeTeamName = match.homeTeam || "TBD";
   const awayTeamName = match.awayTeam || "TBD";
+  const homeFlag = match.homeTeam ? TEAMS[match.homeTeam]?.flag : "";
+  const awayFlag = match.awayTeam ? TEAMS[match.awayTeam]?.flag : "";
 
   const handleHomeChange = (e) => {
     onScoreChange(matchNum, e.target.value, result.awayGoals, result.penaltyWinner);
@@ -26,7 +29,7 @@ export default function KnockoutMatch({ match, result, onScoreChange, onSimulate
     <div className="knockout-match">
       <div className="match-container">
         <div className="team-block">
-          <div className={`team-name ${isTBD ? "tbd" : ""}`}>{homeTeamName}</div>
+          <div className={`team-name ${isTBD ? "tbd" : ""}`}>{homeFlag} {homeTeamName}</div>
           <input
             type="number"
             min="0"
@@ -52,7 +55,7 @@ export default function KnockoutMatch({ match, result, onScoreChange, onSimulate
             placeholder="-"
             className="score-input"
           />
-          <div className={`team-name ${isTBD ? "tbd" : ""}`}>{awayTeamName}</div>
+          <div className={`team-name ${isTBD ? "tbd" : ""}`}>{awayFlag} {awayTeamName}</div>
         </div>
 
         {isScoresEntered && (
@@ -79,13 +82,13 @@ export default function KnockoutMatch({ match, result, onScoreChange, onSimulate
               className={`penalty-btn ${result.penaltyWinner === "home" ? "selected" : ""}`}
               onClick={() => handlePenaltyWinner("home")}
             >
-              {homeTeamName} Wins
+              {homeFlag} {homeTeamName} Wins
             </button>
             <button
               className={`penalty-btn ${result.penaltyWinner === "away" ? "selected" : ""}`}
               onClick={() => handlePenaltyWinner("away")}
             >
-              {awayTeamName} Wins
+              {awayFlag} {awayTeamName} Wins
             </button>
             <button className="penalty-btn simulate-penalty" onClick={() => onSimulate(matchNum)}>
               🎲 Simulate

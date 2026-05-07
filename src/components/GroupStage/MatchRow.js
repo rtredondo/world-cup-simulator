@@ -1,4 +1,5 @@
 import React from "react";
+import { TEAMS } from "../../data/teams.js";
 import "./MatchRow.css";
 
 export default function MatchRow({ match, onScoreChange, onSimulate }) {
@@ -13,9 +14,9 @@ export default function MatchRow({ match, onScoreChange, onSimulate }) {
   return (
     <div className="match-row">
       <div className="match-teams">
-        <span className="team-name">{match.homeTeam}</span>
+        <span className="team-name">{TEAMS[match.homeTeam]?.flag} {match.homeTeam}</span>
         <span className="vs">vs</span>
-        <span className="team-name">{match.awayTeam}</span>
+        <span className="team-name">{TEAMS[match.awayTeam]?.flag} {match.awayTeam}</span>
       </div>
       <div className="match-scores">
         <input

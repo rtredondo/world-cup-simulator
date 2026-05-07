@@ -19,6 +19,33 @@
   letter-spacing: 1px;
 }
 
+.knockout-header .header-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.knockout-header .champion-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: var(--gold);
+  color: var(--bg);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.knockout-header .champion-button:hover {
+  background-color: #ffd700;
+  transform: scale(1.05);
+}
+
+.knockout-header .champion-button:active {
+  transform: scale(0.98);
+}
+
 .knockout-header .reset-button {
   padding: 12px 24px;
   font-size: 16px;
@@ -67,8 +94,18 @@
     text-align: center;
   }
 
-  .knockout-header .reset-button {
+  .knockout-header .header-buttons {
+    justify-content: center;
     width: 100%;
+  }
+
+  .knockout-header .header-buttons button {
+    flex: 1;
+    max-width: 200px;
+  }
+
+  .knockout-header .reset-button {
+    width: auto;
   }
 
   .bracket-content {

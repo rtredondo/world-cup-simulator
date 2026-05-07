@@ -12,6 +12,8 @@ export default function KnockoutBracket({
   onReset,
   advancedTeams,
   slotAssignment,
+  champion,
+  onShowChampion,
 }) {
   // Organize bracket by round
   const rounds = useMemo(() => {
@@ -43,9 +45,16 @@ export default function KnockoutBracket({
     <div className="knockout-bracket-container">
       <div className="knockout-header">
         <h1>2026 FIFA World Cup - Knockout Bracket</h1>
-        <button className="reset-button" onClick={onReset}>
-          Reset
-        </button>
+        <div className="header-buttons">
+          {champion && (
+            <button className="champion-button" onClick={onShowChampion}>
+              🏆 View Champion
+            </button>
+          )}
+          <button className="reset-button" onClick={onReset}>
+            Reset
+          </button>
+        </div>
       </div>
 
       <div className="bracket-scroll">

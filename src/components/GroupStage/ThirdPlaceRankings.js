@@ -1,4 +1,5 @@
 import React from "react";
+import { TEAMS } from "../../data/teams.js";
 import "./ThirdPlaceRankings.css";
 
 export default function ThirdPlaceRankings({ thirdRankings, qualifiedThirds }) {
@@ -27,7 +28,7 @@ export default function ThirdPlaceRankings({ thirdRankings, qualifiedThirds }) {
               <tr key={row.team} className={idx < 8 ? "qualified-3" : ""}>
                 <td>{idx + 1}</td>
                 <td className="group-cell">{row.group}</td>
-                <td className="team-cell">{row.team}</td>
+                <td className="team-cell">{TEAMS[row.team]?.flag} {row.team}</td>
                 <td>{row.played}</td>
                 <td>{row.won}</td>
                 <td>{row.drawn}</td>
