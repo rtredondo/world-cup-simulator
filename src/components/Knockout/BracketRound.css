@@ -6,6 +6,14 @@
   gap: 16px;
 }
 
+.round-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
 .round-label {
   font-size: 14px;
   font-weight: 600;
@@ -13,6 +21,28 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   white-space: nowrap;
+}
+
+.simulate-round-btn {
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--gold), #ffd700);
+  color: var(--bg);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.simulate-round-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(244, 196, 48, 0.4);
+}
+
+.simulate-round-btn:active {
+  transform: scale(0.98);
 }
 
 .matches-column {

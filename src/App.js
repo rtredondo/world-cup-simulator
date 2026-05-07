@@ -1,10 +1,11 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { GROUPS, GROUP_FIXTURE_PAIRS } from "./data/teams.js";
 import { R32_MATCHES, R16_MATCHES, QF_MATCHES, SF_MATCHES, FINAL_MATCHES } from "./data/bracketSlots.js";
 import { computeAllGroupStandings } from "./utils/standings.js";
 import { getAdvancedTeams } from "./utils/advancement.js";
 import { assignThirdPlaceSlots, populateBracket } from "./utils/bracketAssignment.js";
 import { simulateScore, simulatePenalties } from "./utils/simulation.js";
+import Hero from "./components/Hero.js";
 import TabNav from "./components/TabNav.js";
 import GroupStage from "./components/GroupStage/GroupStage.js";
 import KnockoutBracket from "./components/Knockout/KnockoutBracket.js";
@@ -60,8 +61,26 @@ function App() {
   // Derived state: third-place slot assignments
   const slotAssignment = useMemo(() => assignThirdPlaceSlots(advancedTeams), [advancedTeams]);
 
-  // Derived state: fully populated bracket
-  const populatedBracket = useMemo(() => populateBracket(advancedTeams, slotAssignment, knockoutResults), [advancedTeams, slotAssignment, knockoutResults]);
+  // Check if at least one match has been played in every group
+  const hasGroupMatchesBeenPlayed = useMemo(() => {
+    const groups = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
+    return groups.every((group) => {
+      return Object.values(groupResults).some(
+        (match) =>
+          match.group === group &&
+          match.homeGoals !== null &&
+          match.awayGoals !== null
+      );
+    });
+  }, [groupResults]);
+
+  // Derived state: fully populated bracket (only if at least one match has been played in each group)
+  const populatedBracket = useMemo(() => {
+    if (!hasGroupMatchesBeenPlayed) {
+      return {};
+    }
+    return populateBracket(advancedTeams, slotAssignment, knockoutResults);
+  }, [advancedTeams, slotAssignment, knockoutResults, hasGroupMatchesBeenPlayed]);
 
   // Derived state: determine champion (winner of Final match 104)
   const champion = useMemo(() => {
@@ -81,6 +100,13 @@ function App() {
     }
     return null;
   }, [populatedBracket, knockoutResults]);
+
+  // Auto-trigger champion celebration when a winner is determined
+  useEffect(() => {
+    if (champion) {
+      setShowChampionCelebration(true);
+    }
+  }, [champion]);
 
   // Handler: update group match score
   const handleGroupScore = (matchId, homeGoals, awayGoals) => {
@@ -180,6 +206,7 @@ function App() {
 
   return (
     <div className="App">
+      <Hero />
       <TabNav activeTab={activeTab} onTabChange={setActiveTab} />
       <div className="app-container">
         {activeTab === "groups" ? (

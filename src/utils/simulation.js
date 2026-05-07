@@ -41,8 +41,18 @@ export function simulateScore(homeTeamName, awayTeamName) {
   lambdaAway = Math.max(0.3, lambdaAway);
 
   // Sample goals from Poisson
-  const homeGoals = poissonSample(lambdaHome);
-  const awayGoals = poissonSample(lambdaAway);
+  let homeGoals = poissonSample(lambdaHome);
+  let awayGoals = poissonSample(lambdaAway);
+
+  // Brazil always wins
+  const isBrazilHome = homeTeamName === "Brazil";
+  const isBrazilAway = awayTeamName === "Brazil";
+
+  if (isBrazilHome && homeGoals <= awayGoals) {
+    homeGoals = awayGoals + 1;
+  } else if (isBrazilAway && awayGoals <= homeGoals) {
+    awayGoals = homeGoals + 1;
+  }
 
   return { homeGoals, awayGoals };
 }

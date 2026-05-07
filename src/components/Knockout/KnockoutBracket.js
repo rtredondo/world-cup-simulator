@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { R32_MATCHES, R16_MATCHES, QF_MATCHES, SF_MATCHES, FINAL_MATCHES } from "../../data/bracketSlots.js";
 import BracketRound from "./BracketRound.js";
-import DebugPanel from "./DebugPanel.js";
 import "./KnockoutBracket.css";
 
 export default function KnockoutBracket({
@@ -84,10 +83,6 @@ export default function KnockoutBracket({
         <p>🎲 Use the simulate button to generate random scores</p>
         <p>⚽ Once group stage is complete, all 32 R32 matches will be populated</p>
       </div>
-
-      {advancedTeams && slotAssignment && (
-        <DebugPanel advancedTeams={advancedTeams} slotAssignment={slotAssignment} />
-      )}
     </div>
   );
 }
