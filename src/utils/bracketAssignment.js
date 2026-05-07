@@ -399,10 +399,7 @@ export function assignThirdPlaceSlots(advancedTeams) {
   // Groups are ordered A through L (indices 0-11)
   const groupLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
   const qualifiedGroups = new Set(
-    thirdRankings.slice(0, 8).map(t => {
-      const ranking = thirdRankings.find(r => r.team === t.team);
-      return ranking ? ranking.group : null;
-    }).filter(Boolean)
+    thirdRankings.slice(0, 8).map(t => t.group).filter(Boolean)
   );
 
   const binaryKey = groupLetters.map(g => qualifiedGroups.has(g) ? '1' : '0').join('');
@@ -430,10 +427,10 @@ export function assignThirdPlaceSlots(advancedTeams) {
 
   // Map group winner codes to R32 match numbers that have third-place slots
   const groupWinnerToMatch = {
-    "1A": 74,   // M74: 1E vs 3rd(ABCDF)
-    "1B": 73,   // M73: 2A vs 2B (no third)
+    "1A": 79,   // M79: 1A vs 3rd(CEFHI)
+    "1B": 85,   // M85: 1B vs 3rd(EFGIJ)
     "1D": 81,   // M81: 1D vs 3rd(BEFIJ)
-    "1E": 79,   // M79: 1A vs 3rd(CEFHI)
+    "1E": 74,   // M74: 1E vs 3rd(ABCDF)
     "1G": 82,   // M82: 1G vs 3rd(AEHIJ)
     "1I": 77,   // M77: 1I vs 3rd(CDFGH)
     "1K": 87,   // M87: 1K vs 3rd(DEIJL)
