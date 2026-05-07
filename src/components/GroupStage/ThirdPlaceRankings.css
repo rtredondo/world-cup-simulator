@@ -1,0 +1,88 @@
+.third-place-section {
+  margin-top: 60px;
+  padding: 32px 20px;
+  background-color: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.third-place-section h2 {
+  margin: 0 0 20px 0;
+  font-size: 24px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.third-place-container {
+  overflow-x: auto;
+}
+
+.third-place-section table {
+  font-size: 14px;
+  min-width: 600px;
+}
+
+.third-place-section th {
+  padding: 12px 8px;
+  font-size: 12px;
+}
+
+.third-place-section td {
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.third-place-section .group-cell,
+.third-place-section .team-cell {
+  text-align: left;
+  padding-left: 12px;
+}
+
+.third-place-section .points-cell {
+  font-weight: bold;
+  color: var(--gold);
+}
+
+.legend {
+  margin-top: 20px;
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.legend p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 600px) {
+  .third-place-section {
+    padding: 16px;
+  }
+
+  .third-place-section h2 {
+    font-size: 18px;
+  }
+
+  .third-place-section table {
+    font-size: 12px;
+  }
+
+  .third-place-section th {
+    padding: 8px 4px;
+    font-size: 11px;
+  }
+
+  .third-place-section td {
+    padding: 6px 4px;
+  }
+
+  .legend {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

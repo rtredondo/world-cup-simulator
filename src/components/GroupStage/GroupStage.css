@@ -1,0 +1,66 @@
+.group-stage {
+  width: 100%;
+}
+
+.group-stage-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.group-stage-header h1 {
+  margin: 0 0 20px 0;
+  font-size: 32px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.header-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.header-buttons .simulate-btn,
+.header-buttons .reset-button {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+.groups-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 1400px) {
+  .groups-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1000px) {
+  .groups-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .groups-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .group-stage-header h1 {
+    font-size: 24px;
+  }
+
+  .header-buttons {
+    flex-direction: column;
+  }
+
+  .header-buttons button {
+    width: 100%;
+  }
+}

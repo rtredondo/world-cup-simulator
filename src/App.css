@@ -1,38 +1,173 @@
+:root {
+  --bg: #0d1117;
+  --panel: #161b22;
+  --accent: #e63946;
+  --gold: #f4c430;
+  --green-qualify: rgba(45, 106, 79, 0.4);
+  --yellow-third: rgba(107, 76, 17, 0.4);
+  --text: #f0f6fc;
+  --text-muted: #8b949e;
+  --border: #30363d;
+  --input-bg: #0f3460;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  width: 100%;
   min-height: 100vh;
+  background-color: var(--bg);
+}
+
+.app-container {
+  padding: 20px;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+/* TabNav */
+.tab-nav {
+  position: sticky;
+  top: 0;
+  background-color: var(--panel);
+  border-bottom: 2px solid var(--border);
+  padding: 16px 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 16px;
+  z-index: 100;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: transparent;
+  color: var(--text-muted);
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-button:hover {
+  color: var(--text);
+}
+
+.tab-button.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* Reset button */
+.reset-button {
+  padding: 10px 20px;
+  background-color: var(--accent);
   color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 20px auto;
+  display: block;
+  transition: background-color 0.2s;
 }
 
-.App-link {
-  color: #61dafb;
+.reset-button:hover {
+  background-color: #d63142;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+thead {
+  background-color: var(--panel);
+}
+
+th {
+  padding: 10px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+tbody tr.qualified-1 {
+  background-color: var(--green-qualify);
+  font-weight: 500;
+}
+
+tbody tr.qualified-3 {
+  background-color: var(--yellow-third);
+}
+
+/* Inputs */
+input[type="number"] {
+  width: 50px;
+  padding: 6px;
+  background-color: var(--input-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  text-align: center;
+  font-size: 16px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Buttons */
+button {
+  font-family: inherit;
+}
+
+.simulate-btn {
+  padding: 6px 12px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.simulate-btn:hover {
+  background-color: #d63142;
+}
+
+.simulate-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

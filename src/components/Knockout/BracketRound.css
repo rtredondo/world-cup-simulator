@@ -1,0 +1,86 @@
+.bracket-round {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 16px;
+}
+
+.round-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.matches-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Bracket match spacing logic */
+/* R32: 16 matches, natural spacing */
+/* R16: 8 matches, double spacing */
+/* QF: 4 matches, quadruple spacing */
+/* SF: 2 matches, 8x spacing */
+/* Final: 1 match centered */
+
+.bracket-round:nth-child(1) .match-wrapper {
+  /* R32 - normal spacing */
+}
+
+.bracket-round:nth-child(2) .match-wrapper {
+  /* R16 - 2x spacing for bracket alignment */
+}
+
+.bracket-round:nth-child(2) .match-wrapper:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.bracket-round:nth-child(3) .match-wrapper {
+  /* QF - 4x spacing */
+}
+
+.bracket-round:nth-child(3) .match-wrapper:not(:last-child) {
+  margin-bottom: 60px;
+}
+
+.bracket-round:nth-child(4) .match-wrapper {
+  /* SF - 8x spacing */
+}
+
+.bracket-round:nth-child(4) .match-wrapper:not(:last-child) {
+  margin-bottom: 140px;
+}
+
+.bracket-round:nth-child(5) .match-wrapper {
+  /* Final + 3rd place */
+}
+
+@media (max-width: 900px) {
+  .bracket-round {
+    flex-direction: column;
+  }
+
+  .round-label {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .bracket-round {
+    gap: 12px;
+  }
+
+  .matches-column {
+    gap: 16px;
+  }
+
+  .round-label {
+    font-size: 11px;
+  }
+}

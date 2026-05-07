@@ -1,0 +1,31 @@
+.standings-table h3 {
+  margin: 16px 0 12px 0;
+  font-size: 18px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.standings-table table {
+  font-size: 13px;
+}
+
+.standings-table th {
+  padding: 8px 6px;
+  font-size: 12px;
+}
+
+.standings-table td {
+  padding: 8px 6px;
+  text-align: center;
+}
+
+.standings-table .team-cell {
+  text-align: left;
+  padding-left: 12px;
+}
+
+.standings-table .points-cell {
+  font-weight: bold;
+  color: var(--gold);
+}
