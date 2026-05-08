@@ -11,41 +11,11 @@
   border-bottom: none;
 }
 
-.team-box {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  width: 110px;
-  flex-shrink: 0;
-}
-
-.team-box.home {
-  justify-content: flex-end;
-}
-
-.team-box.away {
-  justify-content: flex-start;
-}
-
 .flag {
-  font-size: 18px;
+  font-size: 24px;
   flex-shrink: 0;
-}
-
-.short-name {
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  width: 32px;
   text-align: center;
-}
-
-.team-box.home .short-name {
-  text-align: right;
-}
-
-.team-box.away .short-name {
-  text-align: left;
 }
 
 .match-scores {

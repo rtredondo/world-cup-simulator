@@ -11,17 +11,9 @@ export default function MatchRow({ match, onScoreChange, onSimulate }) {
     onScoreChange(match.matchId, match.homeGoals, e.target.value);
   };
 
-  const getShortName = (fullName) => {
-    // Return first 8 characters or full name if shorter
-    return fullName.length > 8 ? fullName.substring(0, 8) : fullName;
-  };
-
   return (
     <div className="match-row">
-      <div className="team-box home">
-        <span className="flag">{TEAMS[match.homeTeam]?.flag}</span>
-        <span className="short-name" title={match.homeTeam}>{getShortName(match.homeTeam)}</span>
-      </div>
+      <span className="flag" title={match.homeTeam}>{TEAMS[match.homeTeam]?.flag}</span>
 
       <div className="match-scores">
         <input
@@ -43,10 +35,7 @@ export default function MatchRow({ match, onScoreChange, onSimulate }) {
         />
       </div>
 
-      <div className="team-box away">
-        <span className="short-name" title={match.awayTeam}>{getShortName(match.awayTeam)}</span>
-        <span className="flag">{TEAMS[match.awayTeam]?.flag}</span>
-      </div>
+      <span className="flag" title={match.awayTeam}>{TEAMS[match.awayTeam]?.flag}</span>
 
       <button className="simulate-btn" onClick={() => onSimulate(match.matchId)} title="Simulate score">
         🎲

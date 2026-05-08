@@ -50,8 +50,35 @@ export function simulateScore(homeTeamName, awayTeamName) {
 
   if (isBrazilHome && homeGoals <= awayGoals) {
     homeGoals = awayGoals + 1;
+    return { homeGoals, awayGoals };
   } else if (isBrazilAway && awayGoals <= homeGoals) {
     awayGoals = homeGoals + 1;
+    return { homeGoals, awayGoals };
+  }
+
+  // For non-Brazil matches: apply ranking-based win probability
+  const homeWinProb = Math.max(0.15, Math.min(0.85, 0.5 + rankDiff / 200));
+
+  const isHomeWinner = homeGoals > awayGoals;
+  const isAwayWinner = awayGoals > homeGoals;
+  const isDraw = homeGoals === awayGoals;
+
+  // Draws are valid outcomes, don't flip
+  if (isDraw) {
+    return { homeGoals, awayGoals };
+  }
+
+  // If home team should be favoured but away won, decide whether to flip
+  if (homeWinProb > 0.5 && isAwayWinner) {
+    if (Math.random() < homeWinProb) {
+      homeGoals = awayGoals + 1;
+    }
+  }
+  // If away team should be favoured but home won, decide whether to flip
+  else if (homeWinProb < 0.5 && isHomeWinner) {
+    if (Math.random() < (1 - homeWinProb)) {
+      awayGoals = homeGoals + 1;
+    }
   }
 
   return { homeGoals, awayGoals };
