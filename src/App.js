@@ -5,6 +5,7 @@ import { computeAllGroupStandings } from "./utils/standings.js";
 import { getAdvancedTeams } from "./utils/advancement.js";
 import { assignThirdPlaceSlots, populateBracket } from "./utils/bracketAssignment.js";
 import { simulateScore, simulatePenalties } from "./utils/simulation.js";
+import { logSimulation } from "./utils/logger.js";
 import Hero from "./components/Hero.js";
 import TabNav from "./components/TabNav.js";
 import GroupStage from "./components/GroupStage/GroupStage.js";
@@ -105,8 +106,52 @@ function App() {
   useEffect(() => {
     if (champion) {
       setShowChampionCelebration(true);
+
+      // Log simulation to Google Sheets silently
+      try {
+        const finalMatch = populatedBracket[104];
+        const finalResult = knockoutResults[104];
+
+        // Determine runner-up
+        let runnerUp = null;
+        if (finalMatch) {
+          runnerUp = champion === finalMatch.homeTeam ? finalMatch.awayTeam : finalMatch.homeTeam;
+        }
+
+        // Get semi-finalists
+        const sf1Match = populatedBracket[101];
+        const sf2Match = populatedBracket[102];
+        const sf1Result = knockoutResults[101];
+        const sf2Result = knockoutResults[102];
+
+        let sf1 = null;
+        let sf2 = null;
+
+        if (sf1Match && sf1Result) {
+          sf1 = sf1Result.homeGoals > sf1Result.awayGoals || sf1Result.penaltyWinner === "home"
+            ? sf1Match.awayTeam
+            : sf1Match.homeTeam;
+        }
+
+        if (sf2Match && sf2Result) {
+          sf2 = sf2Result.homeGoals > sf2Result.awayGoals || sf2Result.penaltyWinner === "home"
+            ? sf2Match.awayTeam
+            : sf2Match.homeTeam;
+        }
+
+        // Log the simulation
+        logSimulation({
+          champion,
+          runnerUp,
+          sf1,
+          sf2,
+          groups: advancedTeams.firsts || {}
+        });
+      } catch (e) {
+        // Fail silently
+      }
     }
-  }, [champion]);
+  }, [champion, populatedBracket, knockoutResults, advancedTeams]);
 
   // Handler: update group match score
   const handleGroupScore = (matchId, homeGoals, awayGoals) => {
