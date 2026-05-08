@@ -18,6 +18,16 @@
   text-align: center;
 }
 
+.team-code {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
 .match-scores {
   display: flex;
   align-items: center;

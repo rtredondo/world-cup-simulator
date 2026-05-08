@@ -12,6 +12,22 @@ function poissonSample(lambda) {
   return k - 1;
 }
 
+// Calculate win probability based on ranking difference
+function getRankWinProb(rankDiff) {
+  // rankDiff = awayRank - homeRank (positive = home team is better)
+  const absDiff = Math.abs(rankDiff);
+  let prob;
+  if (absDiff <= 5) prob = 0.55;
+  else if (absDiff <= 10) prob = 0.65;
+  else if (absDiff <= 20) prob = 0.70;
+  else if (absDiff <= 50) prob = 0.80;
+  else prob = 0.85;
+
+  // Return from the better team's perspective
+  return rankDiff > 0 ? prob : (1 - prob);
+  // If rankDiff === 0, return 0.5
+}
+
 // Simulate a match score based on team strength (FIFA ranking)
 export function simulateScore(homeTeamName, awayTeamName) {
   const homeTeam = TEAMS[homeTeamName];
@@ -57,7 +73,7 @@ export function simulateScore(homeTeamName, awayTeamName) {
   }
 
   // For non-Brazil matches: apply ranking-based win probability
-  const homeWinProb = Math.max(0.15, Math.min(0.85, 0.5 + rankDiff / 200));
+  const homeWinProb = getRankWinProb(rankDiff);
 
   const isHomeWinner = homeGoals > awayGoals;
   const isAwayWinner = awayGoals > homeGoals;
