@@ -326,6 +326,23 @@
   animation: fadeIn 1s ease-in;
 }
 
+/* Champion meme */
+.champion-meme {
+  width: 100%;
+  max-width: 340px;
+  margin-top: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 1s ease-in;
+}
+
+.champion-meme svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .trophy-bounce {
