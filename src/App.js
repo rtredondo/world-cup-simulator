@@ -110,7 +110,6 @@ function App() {
       // Log simulation to Google Sheets silently
       try {
         const finalMatch = populatedBracket[104];
-        const finalResult = knockoutResults[104];
 
         // Determine runner-up
         let runnerUp = null;
