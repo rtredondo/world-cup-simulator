@@ -60,19 +60,18 @@ export function simulateScore(homeTeamName, awayTeamName) {
   let homeGoals = poissonSample(lambdaHome);
   let awayGoals = poissonSample(lambdaAway);
 
-  // Brazil always wins
-  const isBrazilHome = homeTeamName === "Brazil";
-  const isBrazilAway = awayTeamName === "Brazil";
-
-  if (isBrazilHome && homeGoals <= awayGoals) {
-    homeGoals = awayGoals + 1;
+  // BRAZIL ALWAYS WINS — check this first, return immediately
+  if (homeTeamName === "Brazil") {
+    if (homeGoals <= awayGoals) homeGoals = awayGoals + 1;
     return { homeGoals, awayGoals };
-  } else if (isBrazilAway && awayGoals <= homeGoals) {
-    awayGoals = homeGoals + 1;
+  }
+  if (awayTeamName === "Brazil") {
+    if (awayGoals <= homeGoals) awayGoals = homeGoals + 1;
     return { homeGoals, awayGoals };
   }
 
-  // For non-Brazil matches: apply ranking-based win probability
+  // Only reach here if Brazil is NOT playing
+  // Apply ranking-based win probability for non-Brazil matches
   const homeWinProb = getRankWinProb(rankDiff);
 
   const isHomeWinner = homeGoals > awayGoals;

@@ -40,6 +40,10 @@ export default function ChampionCelebration({ winner, onDismiss }) {
 
   return (
     <div className="champion-overlay">
+      <button className="close-btn" onClick={handleDismiss} title="Close">
+        ✕
+      </button>
+
       <div className="confetti-container">
         {confettiPieces}
       </div>
@@ -49,12 +53,13 @@ export default function ChampionCelebration({ winner, onDismiss }) {
           {fireworks}
         </div>
 
-        <div className="trophy-bounce">
-          🏆
-        </div>
-
-        <div className="winner-flag">
-          {winnerFlag}
+        <div className="trophy-flag-row">
+          <div className="trophy-bounce">
+            🏆
+          </div>
+          <div className="winner-flag">
+            {winnerFlag}
+          </div>
         </div>
 
         <h1 className="winner-name">{winner}</h1>
@@ -68,10 +73,6 @@ export default function ChampionCelebration({ winner, onDismiss }) {
             className="champion-extra-img"
           />
         )}
-
-        <button className="dismiss-btn" onClick={handleDismiss}>
-          Continue Viewing
-        </button>
       </div>
     </div>
   );
