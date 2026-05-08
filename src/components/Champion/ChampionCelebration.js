@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { TEAMS } from "../../data/teams.js";
 import "./ChampionCelebration.css";
 
+const CHAMPION_EXTRA_IMAGES = {
+  "Argentina": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQENlx6vdYsfx-NuTTbcv08qQw-KD40K9tISg&s",
+  "Brazil": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyCczKnn_MuqxH4b-aQWNtYLHDadG_z3EPYw&s",
+  "Portugal": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9EijjpibhwN9wfPHb59wkOezoOzGIf-8vwQ&s"
+};
+
 export default function ChampionCelebration({ winner, onDismiss }) {
   const [isShowing, setIsShowing] = useState(true);
 
@@ -54,6 +60,14 @@ export default function ChampionCelebration({ winner, onDismiss }) {
         <h1 className="winner-name">{winner}</h1>
 
         <h2 className="champion-text">FIFA World Cup 2026 Champions!</h2>
+
+        {CHAMPION_EXTRA_IMAGES[winner] && (
+          <img
+            src={CHAMPION_EXTRA_IMAGES[winner]}
+            alt={winner}
+            className="champion-extra-img"
+          />
+        )}
 
         <button className="dismiss-btn" onClick={handleDismiss}>
           Continue Viewing

@@ -278,6 +278,16 @@
   letter-spacing: 2px;
 }
 
+/* Champion extra image */
+.champion-extra-img {
+  max-width: 280px;
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 1s ease-in;
+}
+
 /* Dismiss button */
 .dismiss-btn {
   margin-top: 40px;

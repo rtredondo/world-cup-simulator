@@ -37,8 +37,8 @@ export function simulateScore(homeTeamName, awayTeamName) {
     return { homeGoals: 0, awayGoals: 0 };
   }
 
-  const rankHome = homeTeam.fifaRanking;
-  const rankAway = awayTeam.fifaRanking;
+  const rankHome = homeTeam?.fifaRanking || 50;
+  const rankAway = awayTeam?.fifaRanking || 50;
 
   // Calculate strength differential (lower rank = stronger team)
   const rankDiff = rankAway - rankHome; // positive = home team stronger
