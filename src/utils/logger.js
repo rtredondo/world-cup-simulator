@@ -9,6 +9,7 @@ function getOrCreateSessionId() {
 }
 
 export async function logSimulation(data) {
+  console.log('logSimulation called with:', data);
   try {
     const sessionId = getOrCreateSessionId();
     const payload = {
@@ -34,12 +35,16 @@ export async function logSimulation(data) {
       }
     };
 
-    await fetch('https://sheetdb.io/api/v1/2gdpftjjcwczk', {
+    console.log('Sending payload to SheetDB:', payload);
+    const response = await fetch('https://sheetdb.io/api/v1/2gdpftjjcwczk', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
+    const result = await response.json();
+    console.log('SheetDB response:', result);
   } catch (e) {
+    console.log('Error in logSimulation:', e);
     // Fail silently — never interrupt the user experience
   }
 }
